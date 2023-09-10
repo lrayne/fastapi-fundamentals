@@ -1,19 +1,14 @@
 from fastapi import FastAPI
-from app.models.models import User
 
 app = FastAPI()
 
-user = User(name="John Due", id=1)
+fake_users = {
+    1: {"username": "john_doe", "email": "john@example.com"},
+    2: {"username": "jane_smith", "email": "jane@example.com"},
+}
 
-
-@app.get("/")
-def read_root():
-    return {"message": "Hello, World!"}
-
-@app.get("/custom")
-def read_custom_message():
-    return {"message": "This is a custom message!"}
-
-@app.get("/users")
-def read_users():
-    return user
+@app.get("/users/{user_id}")
+def read_user(user_id: int):
+    if user_id in fake_users:
+        return fake_users[user_id]
+    return {"error": "User not found"}
