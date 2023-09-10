@@ -8,3 +8,9 @@ class User(BaseModel):
 class FeedBack(BaseModel):
     name: str
     message: str
+
+class UserCreate(BaseModel):
+    name: str
+    email: str
+    age: int
+    is_subscribed: bool = None

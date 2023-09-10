@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .models.models import FeedBack
+from .models.models import FeedBack, UserCreate
 
 app = FastAPI()
 
@@ -35,3 +35,7 @@ async def send_feedback(feedback: FeedBack):
 @app.get("/comments")
 async def show_feedback():
     return fake_feedback_lst
+
+@app.post("/create_user")
+async def create_user(user: UserCreate):
+    return user
